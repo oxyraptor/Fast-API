@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+
+    <div class="app-container">
+      <header>
+        <div class="logo">
+          <i class="fa-solid fa-layer-group"></i>
+          <h1>Analytics<span class="highlight">AI</span></h1>
+        </div>
+        <div class="user-profile">
+          <span>Welcome, User</span>
+          <div class="avatar">U</div>
+        </div>
+      </header>
+
+      <main>
+        <!-- Upload Section -->
+        <section id="upload-section" class="glass-panel">
+          <div class="upload-container" id="drop-zone">
+            <div class="icon-pulse">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <h2>Upload Dataset</h2>
+            <p>Drag & drop your CSV file here or click to browse</p>
+            <input type="file" id="file-input" accept=".csv" hidden />
+            <button
+              class="btn-primary"
+              onclick="document.getElementById('file-input').click()"
+            >
+              BSOWSE FILES
+            </button>
+            <div id="upload-status" class="status-message"></div>
+          </div>
+        </section>
+
+        <!-- Dashboard Section (Hidden by default) -->
+        <section id="dashboard-section" class="hidden">
+          <div class="dashboard-grid">
+            <!-- Sidebar: Dataset List -->
+            <div class="glass-panel sidebar">
+              <div class="panel-header">
+                <h3><i class="fa-solid fa-database"></i> Datasets</h3>
+                <div class="header-actions">
+                  <button
+                    class="btn-icon"
+                    onclick="showUpload()"
+                    title="Upload New"
+                  >
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                  <button class="btn-icon" onclick="refreshDatasets()">
+                    <i class="fa-solid fa-rotate-right"></i>
+                  </button>
+                </div>
+              </div>
+              <ul id="dataset-list" class="dataset-list">
+                <!-- List items injected here -->
+                <li class="loading-item">Loading datasets...</li>
+              </ul>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+              <!-- Stats Request Prompt -->
+              <div id="select-prompt" class="glass-panel prompt-panel">
+                <i class="fa-solid fa-chart-pie"></i>
+                <h3>Select a dataset to view analytics</h3>
+              </div>
+
+              <!-- Stats View -->
+              <div id="stats-view" class="hidden">
+                <div class="stats-header">
+                  <h2 id="current-filename">dataset.csv</h2>
+                  <span class="badge" id="dataset-id-badge">ID: ...</span>
+                </div>
+
+                <div class="cards-grid">
+                  <!-- Summary Card -->
+                  <div class="glass-panel card">
+                    <div class="card-icon">
+                      <i class="fa-solid fa-table"></i>
+                    </div>
+                    <div class="card-info">
+                      <h4>Rows</h4>
+                      <p id="rows-count">-</p>
+                    </div>
+                  </div>
+                  <div class="glass-panel card">
+                    <div class="card-icon">
+                      <i class="fa-solid fa-columns"></i>
+                    </div>
+                    <div class="card-info">
+                      <h4>Columns</h4>
+                      <p id="cols-count">-</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="content-split">
+                  <!-- Missing Values -->
+                  <div class="glass-panel detail-panel">
+                    <h4>
+                      <i class="fa-solid fa-triangle-exclamation"></i> Missing
+                      Values
+                    </h4>
+                    <div
+                      id="missing-values-container"
+                      class="scrollable-content"
+                    >
+                      <!-- Missing values bars -->
+                    </div>
+                  </div>
+
+                  <!-- Column Types -->
+                  </div>
+                </div>
+
+                <!-- Correlation Matrix -->
+                <div class="glass-panel matrix-panel">
+                    <h4><i class="fa-solid fa-chart-simple"></i> Correlation Matrix</h4>
+                    <div id="correlation-matrix-container" class="matrix-scroll">
+                        <div style="padding: 20px; text-align: center; color: #94a3b8;">
+                            Loading matrix...
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
